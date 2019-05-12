@@ -1,9 +1,20 @@
+#include "nnpf.h"
 #include <vector>
 using namespace std;
 
 Layer::Layer(vector<double> in, vector<Neuron> neu){
 	inputs = in;
 	neurons = neu;
+	outputs.resize(neurons.size());
+	this->update_outputs();
+}
+
+Layer::Layer(vector<double> in, int neuron_num){
+	inputs = in;
+	neurons.resize(neuron_num);
+	for (int i=0;i<neuron_num;i++){
+		neurons[i]=Neuron(inputs);
+	}
 	outputs.resize(neurons.size());
 	this->update_outputs();
 }
