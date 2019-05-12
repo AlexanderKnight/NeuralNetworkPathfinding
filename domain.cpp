@@ -6,22 +6,18 @@
 #include "nnpf.h"
 using namespace std;
 
-/*class Domain {
-		int width;
-		int height;
-		vector<vector<int> > domain;
-	public:
-		Domain (int w, int h);
-		const int get_width();
-		const int get_height();
-		void set_loc_prop(int x, int y, int s);
-		const int get_loc_prop(int x, int y);
-};*/
+/*
+	The domain class is build to create and handle the
+	domain that the seekers (creatures) will travel through.
+	It will create blockades randomly, and is adjustable in size.
 
+	The value of the 2D matrix elements tell if the space is open or not.
+	A value of 0 = space is open.
+	Value of 1 = space is blocked.
+*/
 Domain::Domain (int w, int h){
 	width = w;
 	height = h;
-	//vector<vector<int>> domain(width, vector<int>(height));
 	domain.resize(width);
 	for (int i=0;i<width;i++){
 		domain[i].resize(height);
