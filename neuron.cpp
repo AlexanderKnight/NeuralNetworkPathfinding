@@ -4,6 +4,17 @@
 #include <assert>
 using namespace std;
 
+/* The Neuron is the basis of the network, taking in input,
+   scaling it by a weight, add up each input*weight, and then
+   adding a bias, to finally get the output. 
+
+   The output is scaled with ReLU (Rectified Linear Unit) or
+   max(output, 0.).
+
+   There are two constructors, depending on if the Neurons are 
+   created before, or randomly when this is created
+*/
+
 Neuron::Neuron(vector<double> in, vector<double> w, double b){
 	bias = b;
 	assert(in.size()==w.size());
@@ -16,13 +27,15 @@ Neuron::Neuron(vector<double> in, vector<double> w, double b){
 	output += bias;
 }
 
-Neuron::Neuron(vector<double> in){
-	bias = fRand(-10.,10.);
+Neuron::Neuron(vector<double> in, 
+		vector<double> bias_range, 
+		vector<double> weight_range){
+	bias = fRand(bias_range[0],bias_range[1]);
 	inputs = in;
 	weights.resize(inputs.size());
 	output=0.;
 	for (int i=0;i<inputs.size();i++){
-		weights[i] = fRand(-5.,5.);
+		weights[i] = fRand(weight_range[0],weight_range[1]);
 		output += inputs[i]*weights[i];
 	}
 	output += bias;
