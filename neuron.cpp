@@ -28,14 +28,16 @@ Neuron::Neuron(vector<double> in, vector<double> w, double b){
 }
 
 Neuron::Neuron(vector<double> in, 
-		vector<double> bias_range, 
-		vector<double> weight_range){
-	bias = fRand(bias_range[0],bias_range[1]);
+		vector<double> b_range, 
+		vector<double> w_range){
+	weight_range = w_range;
+	bias_range = b_range;
+	bias = fRand(b_range[0],b_range[1]);
 	inputs = in;
 	weights.resize(inputs.size());
 	output=0.;
 	for (int i=0;i<inputs.size();i++){
-		weights[i] = fRand(weight_range[0],weight_range[1]);
+		weights[i] = fRand(w_range[0],w_range[1]);
 		output += inputs[i]*weights[i];
 	}
 	output += bias;
@@ -82,5 +84,11 @@ void Neuron::update_output(void){
 	
 }
 
+void Neuron::mutate(void){
+	for (int i=0; i<weights.size();i++){
+		weights[i] *= 1+fRand(-0.05+0.05);
+	}
+	bias *= 1+fRand(-0.05+0.05);
+}
 
 

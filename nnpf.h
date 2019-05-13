@@ -28,6 +28,7 @@ class Neuron{
 	double bias, output;
 	public:
 		Neuron(vector<double> in,vector<double> w,double b);
+		Neuron(vector<double> in);
 		const vector<double> get_inputs(void);
 		void set_inputs(vector<double> in);
 		const vector<double> get_weights(void);
