@@ -91,4 +91,9 @@ void Neuron::mutate(void){
 	bias *= 1+fRand(-0.05+0.05);
 }
 
-
+void Neuron::reset(void){
+	for (int i=0;i<weights.size();i++){
+		weights[i] = fRand(weights_range[0],weights_range[1]);
+	}
+	bias = fRand(bias_range[0],bias_range[1]);
+}
