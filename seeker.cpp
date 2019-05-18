@@ -5,6 +5,8 @@ Seeker::Seeker(vector<double> in){
 	score = 0.;
 	x = 2.;
 	y = 2.;
+	vector<vector<double>> position;
+	position.push_back(vector<double> {x,y})
 	input = flatten_int_array(in);
 	input.push_back(x);
 	input.push_back(y);
@@ -26,6 +28,10 @@ void Seeker::move_seeker(void){
 		y += (outputs[2]-outputs[3])/absXY;
 		input[input.size()-2] = x;
 		input[input.size()-1] = y;
+		position.push_back(vector<double> {x,y});
+		if (domain[(int)x][(int)y]==3){
+			isDead = true;
+		}
 	}
 }
 
