@@ -1,3 +1,5 @@
+#include <fstream>
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -43,5 +45,17 @@ void Seeker::check_collision(Domain domain){
 
 void Seeker::calc_score(int goal_x,int goal_y){
 	score += 1./(pow((double)goal_x-x,2)+pow((double) goal_y-y),2);
+
+void Seeker::write_seeker(string filename){
+	ofstream seeker_file(filename);
+	seeker_file.write((char *) & Seeker, sizeof(Seeker));
+	seeker_file.close();
+}
+
+void Seeker::read_seeker(string filename){
+	ifstream seeker_file(filename);
+	seeker_file.read((char *) & Seeker; sizeof(Seeker));
+}
+	
 
 

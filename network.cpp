@@ -56,3 +56,11 @@ void Network::reset(void)
 		layers[i].reset();
 	}
 }
+
+const vector<vector<vector<double>>> get_genes(void){
+	vector<vector<vector<double>>> network_genes;
+	for(int i=0;i<layers.size;i++){
+		network_genes.push_back(layers[i].get_genes());
+	}
+	return network_genes;
+}

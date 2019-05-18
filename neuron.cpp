@@ -68,6 +68,12 @@ void Neuron::set_bias(double b){
 	bias = b;
 }
 
+const vector<double> Neuron::get_genes(void){
+	vector<double> genes(weights);
+	genes.push_back(bias);
+	return genes;
+}
+
 const double Neuron::get_ouput(void){
 	return output;
 }

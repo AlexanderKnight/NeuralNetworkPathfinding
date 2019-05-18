@@ -62,3 +62,10 @@ void Layer::reset(void){
 	}
 }
 
+const vector<vector<double>> get_genes(void){
+	vector<vector<double>> layer_genes;
+	for(int i=0;i<neurons.size();i++){
+		layer_genes.push_back(neurons[i].get_genes());
+	}
+	return layer_genes;
+}
