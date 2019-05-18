@@ -6,7 +6,7 @@
 #include <fstream>
 using namespace std;
 
-#include "nnpf.h"
+#include "dom.h"
 
 /*
 	The domain class is build to create and handle the
@@ -57,6 +57,8 @@ Domain::Domain (int w, int h, int randChance){
 		domain[0][j] = 1;
 		domain[width-1][j] = 1;
 	}
+	domain[1][1] = 2;
+	domain[width-2][height-2] = 3;
 }
 
 const int Domain::get_width(void){
@@ -75,13 +77,48 @@ const int Domain::get_loc_prop(int x,int y){
 	return domain[x][y];
 }
 
-void Domain::reset(void){
+void Domain::set_zero(void){
 	for(int i=0;i<width;i++){
 		for(int j=0;j<height;j++){
 			domain[i][j]=0;
 		}
 	}
 }
+
+void Domain::reset_domain(int w, int h, int randChance){
+	this->set_zero();
+	width = w;
+	height = h;
+	domain.resize(width);
+	for (int i=0;i<width;i++){
+		domain[i].resize(height);
+		for (int j=0;j<height;j++){
+			domain[i][j]=0;
+		}
+	}
+	srand(time(0));
+	for (int i=0;i<width;i++){
+		for (int j=0;j<height;j++){
+			if ((rand()%100+1)<randChance){
+				domain[i][j] = 1;
+			}
+		}
+	}
+	this->clear_loc(2,2);
+	this->clear_loc(width-2,height-2);
+	for (int i=0;i<width;i++){
+		domain[i][0] = 1;
+		domain[i][height-1] =1;
+	}
+	for (int j=0;j<height;j++){
+		domain[0][j] = 1;
+		domain[width-1][j] = 1;
+	}
+
+	domain[1][1] = 2;
+	domain[width-2][height-2] = 3;
+}
+
 
 void Domain::clear_loc(int x,int y){
 	domain[x-1][y-1] = 0;
@@ -127,8 +164,7 @@ const void Domain::print_domain(void){
 }
 
 
-
-int main(){
+/*int main(){
 	srand(time(0));
 	cout << "Random number is : " << rand() % 100+1 << endl;
 	int wid = 10;
@@ -139,4 +175,6 @@ int main(){
 	//domain.save_domain("TestDomain.txt");
 	domain.load_domain("TestDomain.txt");
 	domain.print_domain();
-}
+	double a = 15.5;
+	cout << (int) a/1 << endl;
+}*/
