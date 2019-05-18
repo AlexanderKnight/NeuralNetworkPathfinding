@@ -52,6 +52,7 @@ class Neuron{
 		void update_output(void);
 		void mutate(void);
 		void reset(void);
+		const vector<double> get_genes(void);
 };
 
 class Layer{
@@ -66,6 +67,7 @@ class Layer{
 		void update_outputs(void);
 		void mutate(void);
 		void reset(void);
+		const vector<vector<double>> get_genes(void);
 };
 
 class Network{
@@ -75,12 +77,23 @@ class Network{
 	public:
 		void mutate(void);
 		void reset(void);
+		void set_inputs(vector<double> in);
+		void update_network(void);
+		const vector<vector<vector<double>>> get_genes(void);
+		const int layer_num(void);  
 };
 
 class Seeker{
 	double score, x, y;
 	Network network;
 	vector<double> input, outputs;
+	public:
+		void update_nework(void);
+		void move_seeker(void);
+		void check_collisions(Domain domain);
+		void calc_score(int goal_x,int goal_y);
+		void write_seeker(string filename);
+		void read_seeker(string filename);
 };
 
 #endif
