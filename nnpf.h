@@ -11,6 +11,28 @@ double fRand(double fMin, double fMax)
 	        return fMin + f * (fMax - fMin);
 }
 
+vector<int> flatten_int_array(vector<vector<int>> v){
+	vector<int> new_v;
+	new_v.resize(v.size()*v[0].size());
+	for(int i=0;i<v.size();i++){
+		for(int j=0;j<v[i].size();j++){
+			new_v[i*v[i].size()+j]=v[i][j];
+		}
+	}
+	return new_v;
+}
+
+vector<double> flatten_double_array(vector<vector<double>> v){
+	vector<double> new_v;
+	new_v.resize(v.size()*v[0].size());
+	for(int i=0;i<v.size();i++){
+		for(int j=0;j<v[i].size();j++){
+			new_v[i*v[i].size()+j]=v[i][j];
+		}
+	}
+	return new_v;
+}
+
 class Domain{
 	int width, height;
 	vector<vector<int>> domain;
