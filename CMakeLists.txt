@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 2.6)
 project (NeuralNetworkPathfinding)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+find_package(MPI REQUIRED)
+
 add_library(nnpflib nnpf.h main.cpp)
 add_library(domlib dom.h domain.cpp)
 
@@ -21,4 +23,4 @@ add_executable(create_domain create_domain.cpp)
 target_link_libraries(create_domain domlib)
 
 add_executable(pathfinder main.cpp)
-target_link_libraries(pathfinder domlib nnpflib)
+target_link_libraries(pathfinder domlib nnpflib MPI::MPI_C)
