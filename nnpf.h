@@ -121,7 +121,10 @@ class Seeker{
 		void calc_score(int goal_x,int goal_y);
 		void write_seeker(string filename);
 		void read_seeker(string filename);
+		void reset_position(double x, double y);
 		void write_position(string filename);
+		void reset_network(void);
+		void mutate_network(void);
 };
 
 #endif

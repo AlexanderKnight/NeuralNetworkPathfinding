@@ -67,11 +67,26 @@ void Seeker::read_seeker(string filename){
 	seeker_file.close();
 }
 
+void Seeker::reset_position(double xx, double yy){
+	input[input.size()-2]=xx;
+	x = xx;
+	input[input.size()-1]=yy;
+	y = yy;
+	isDead = false;
+}
+
 void Seeker::write_position(string filename){
-	ofstream pos_file(filename);
+	ofstream pos_file(filename, ios::out | ios::app);
 	for(int i=0;i<position.size();i++){
 		pos_file << position[i][0] << " " << position[i][1] << endl;
 	}
 	pos_file.close();
 }
 
+void Seeker::reset_network(void){
+	network->reset();
+}
+
+void Seeker::mutate_network(void){
+	network->mutate();
+}

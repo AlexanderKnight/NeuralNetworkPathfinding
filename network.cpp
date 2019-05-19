@@ -50,12 +50,14 @@ void Network::mutate(void){
 	for (int i=0;i<layers.size();i++){
 		layers[i].mutate();
 	}
+	this->update_network();
 }
 
 void Network::reset(void){
 	for (int i=0;i<layers.size();i++){
 		layers[i].reset();
 	}
+	this->update_network();
 }
 
 const vector<vector<vector<double>>> Network::get_genes(void){
