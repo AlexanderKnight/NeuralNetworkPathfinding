@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-#include "dom.h"
+#include "nnpf.h"
 
 int main(){
 	int width = 20;

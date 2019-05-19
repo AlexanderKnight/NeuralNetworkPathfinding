@@ -5,7 +5,6 @@
 using namespace std;
 
 #include "nnpf.h"
-#include "dom.h"
 
 int main(int argc, char **argv){
 	string load_domain_filename = "20x20rand30.dat";
@@ -30,7 +29,7 @@ int main(int argc, char **argv){
 
 	for(int time=0;time<runtime;time++){
 		for(int i=0;i<seekers.size();i++){
-			seekers[i].move_seeker();
+			seekers[i].move_seeker(domain.domain);
 			seekers[i].check_collisions(domain.domain);
 			seekers[i].calc_score(18,18);
 		}

@@ -6,7 +6,7 @@
 #include <fstream>
 using namespace std;
 
-#include "dom.h"
+#include "nnpf.h"
 
 /*
 	The domain class is build to create and handle the
@@ -24,7 +24,7 @@ Domain::Domain (int w, int h){
 	for (int i=0;i<width;i++){
 		domain[i].resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0;
+			domain[i][j]=0.;
 		}
 	}
 }
@@ -36,29 +36,29 @@ Domain::Domain (int w, int h, int randChance){
 	for (int i=0;i<width;i++){
 		domain[i].resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0;
+			domain[i][j]=0.;
 		}
 	}
 	srand(time(0));
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){
 			if ((rand()%100+1)<randChance){
-				domain[i][j] = 1;
+				domain[i][j] = 1.;
 			}
 		}
 	}
 	this->clear_loc(2,2);
 	this->clear_loc(width-2,height-2);
 	for (int i=0;i<width;i++){
-		domain[i][0] = 1;
-		domain[i][height-1] =1;
+		domain[i][0] = 1.;
+		domain[i][height-1] =1.;
 	}
 	for (int j=0;j<height;j++){
-		domain[0][j] = 1;
-		domain[width-1][j] = 1;
+		domain[0][j] = 1.;
+		domain[width-1][j] = 1.;
 	}
 	domain[1][1] = 2;
-	domain[width-2][height-2] = 3;
+	domain[width-2][height-2] = 3.;
 }
 
 const int Domain::get_width(void){
@@ -69,7 +69,7 @@ const int Domain::get_height(void){
 	return height;
 }
 
-void Domain::set_loc_prop(int x,int y,int s){
+void Domain::set_loc_prop(int x,int y,double s){
 	domain[x][y] = s;
 }
 
@@ -80,7 +80,7 @@ const int Domain::get_loc_prop(int x,int y){
 void Domain::set_zero(void){
 	for(int i=0;i<width;i++){
 		for(int j=0;j<height;j++){
-			domain[i][j]=0;
+			domain[i][j]=0.;
 		}
 	}
 }
@@ -93,38 +93,38 @@ void Domain::reset_domain(int w, int h, int randChance){
 	for (int i=0;i<width;i++){
 		domain[i].resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0;
+			domain[i][j]=0.;
 		}
 	}
 	srand(time(0));
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){
 			if ((rand()%100+1)<randChance){
-				domain[i][j] = 1;
+				domain[i][j] = 1.;
 			}
 		}
 	}
 	this->clear_loc(2,2);
 	this->clear_loc(width-2,height-2);
 	for (int i=0;i<width;i++){
-		domain[i][0] = 1;
-		domain[i][height-1] =1;
+		domain[i][0] = 1.;
+		domain[i][height-1] =1.;
 	}
 	for (int j=0;j<height;j++){
 		domain[0][j] = 1;
-		domain[width-1][j] = 1;
+		domain[width-1][j] = 1.;
 	}
 
 	domain[1][1] = 2;
-	domain[width-2][height-2] = 3;
+	domain[width-2][height-2] = 3.;
 }
 
 
 void Domain::clear_loc(int x,int y){
-	domain[x-1][y-1] = 0;
-	domain[x][y-1] = 0;
-	domain[x-1][y] = 0;
-	domain[x][y] = 0;
+	domain[x-1][y-1] = 0.;
+	domain[x][y-1] = 0.;
+	domain[x-1][y] = 0.;
+	domain[x][y] = 0.;
 }
 
 void Domain::save_domain(string filename){

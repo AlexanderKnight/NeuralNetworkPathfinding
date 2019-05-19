@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <assert>
+#include <assert.h>
 using namespace std;
+
+#include "nnpf.h"
 
 /* The Neuron is the basis of the network, taking in input,
    scaling it by a weight, add up each input*weight, and then
@@ -28,8 +30,8 @@ Neuron::Neuron(vector<double> in, vector<double> w, double b){
 }
 
 Neuron::Neuron(vector<double> in, 
-		vector<double> b_range, 
-		vector<double> w_range){
+		vector<double> w_range, 
+		vector<double> b_range){
 	weight_range = w_range;
 	bias_range = b_range;
 	bias = fRand(b_range[0],b_range[1]);
@@ -74,7 +76,7 @@ const vector<double> Neuron::get_genes(void){
 	return genes;
 }
 
-const double Neuron::get_ouput(void){
+const double Neuron::get_output(void){
 	return output;
 }
 
@@ -92,14 +94,14 @@ void Neuron::update_output(void){
 
 void Neuron::mutate(void){
 	for (int i=0; i<weights.size();i++){
-		weights[i] *= 1+fRand(-0.05+0.05);
+		weights[i] *= 1+fRand(-0.05,0.05);
 	}
-	bias *= 1+fRand(-0.05+0.05);
+	bias *= 1+fRand(-0.05,0.05);
 }
 
 void Neuron::reset(void){
 	for (int i=0;i<weights.size();i++){
-		weights[i] = fRand(weights_range[0],weights_range[1]);
+		weights[i] = fRand(weight_range[0],weight_range[1]);
 	}
 	bias = fRand(bias_range[0],bias_range[1]);
 }

@@ -8,12 +8,12 @@ using namespace std;
 class Domain{
 	int width, height;
 	public:
-		vector<vector<int>> domain;
+		vector<vector<double> > domain;
 		Domain(int w, int h);
 		Domain(int w, int h, int randChance);
 		const int get_width(void);
 		const int get_height(void);
-		void set_loc_prop(int x,int y,int s);
+		void set_loc_prop(int x,int y,double s);
 		const int get_loc_prop(int x,int y);
 		void clear_loc(int x, int y);
 		void save_domain(string s);

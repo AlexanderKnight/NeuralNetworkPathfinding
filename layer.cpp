@@ -1,7 +1,8 @@
-#include "nnpf.h"
+#include <assert.h>
 #include <vector>
 using namespace std;
 
+#include "nnpf.h"
 
 /*	This class handles each layer of the neural network
 	and allows the handling of the neurons without direct
@@ -20,14 +21,13 @@ Layer::Layer(vector<double> in, vector<Neuron> neu){
 }
 
 Layer::Layer(vector<double> in, int neuron_num,
-		vector<double> b_range,
-		vector<double> w_range){
+		vector<double> w_range,
+		vector<double> b_range){
 	bias_range = b_range;
 	weight_range = w_range;
 	inputs = in;
-	neurons.resize(neuron_num);
 	for (int i=0;i<neuron_num;i++){
-		neurons[i]=Neuron(inputs,bias_range,weight_range);
+		neurons.push_back(Neuron(inputs,bias_range,weight_range));
 	}
 	outputs.resize(neurons.size());
 	this->update_outputs();
@@ -44,25 +44,25 @@ const vector<double> Layer::get_outputs(void){
 
 void Layer::update_outputs(void){
 	for (int i=0;i<neurons.size();i++){
-		neuron[i].set_inputs(inputs);
-		neuron[i].update_output();
-		outputs[i] = neuron[i].get_output();
+		neurons[i].set_inputs(inputs);
+		neurons[i].update_output();
+		outputs[i] = neurons[i].get_output();
 	}
 }
 
 void Layer::mutate(void){
 	for (int i=0;i<neurons.size();i++){
-		neuron[i].mutate()
+		neurons[i].mutate();
 	}
 }
 
 void Layer::reset(void){
-	for(int i=0;i<neurons.size;i++){
+	for(int i=0;i<neurons.size();i++){
 		neurons[i].reset();
 	}
 }
 
-const vector<vector<double>> get_genes(void){
+const vector<vector<double>> Layer::get_genes(void){
 	vector<vector<double>> layer_genes;
 	for(int i=0;i<neurons.size();i++){
 		layer_genes.push_back(neurons[i].get_genes());
