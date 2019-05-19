@@ -3,13 +3,14 @@
 #include <vector>
 using namespace std;
 
-Seeker::Seeker(vector<double> in){
+Seeker::Seeker(vector<vector<int>> in){
 	score = 0.;
 	x = 2.;
 	y = 2.;
 	vector<vector<double>> position;
-	position.push_back(vector<double> {x,y})
-	input = flatten_int_array(in);
+	position.push_back(vector<double> {x,y});
+	vector<vector<double>> inp(in.begin(), in.end());
+	input = flatten_int_array(inp);
 	input.push_back(x);
 	input.push_back(y);
 	Network network = new Network(4,15,input, fRand(-10.,10.),fRand(-5.,5.));
@@ -22,7 +23,7 @@ void Seeker::update_network(void){
 	outputs = network.get_outputs();
 }
 
-void Seeker::move_seeker(void){
+void Seeker::move_seeker(vector<vector<int>> domain){
 	if not (isDead){
 		this->update_network();
 		double absXY = sqrt(pow(outputs[0]-outputs[1],2)+pow(outputs[2]-outputs[3],2));
@@ -37,7 +38,7 @@ void Seeker::move_seeker(void){
 	}
 }
 
-void Seeker::check_collision(Domain domain){
+void Seeker::check_collision(vector<vector<int>> domain){
 	if (domain[(int) x][(int) y]==1){
 		isDead = true;
 	}
@@ -56,6 +57,15 @@ void Seeker::read_seeker(string filename){
 	ifstream seeker_file(filename);
 	seeker_file.read((char *) & Seeker; sizeof(Seeker));
 }
+
+void Seeker::write_position(string filename){
+	ofstream pos_file(filename);
+	for(int i=0;i<position.size();i++){
+		pos_file << position[i][0] << " " << position[i][1] << endl;
+	}
+	pos_file.close();
+}
+
 	
 
 
