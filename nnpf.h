@@ -5,6 +5,8 @@
 #include <vector>
 using namespace std;
 
+#include "dom.h"
+
 double fRand(double fMin, double fMax)
 {
 	    double f = (double)rand() / RAND_MAX;
@@ -88,12 +90,14 @@ class Seeker{
 	Network network;
 	vector<double> input, outputs;
 	public:
+		Seeker(vector<vector<int>> domain);
 		void update_nework(void);
 		void move_seeker(void);
 		void check_collisions(Domain domain);
 		void calc_score(int goal_x,int goal_y);
 		void write_seeker(string filename);
 		void read_seeker(string filename);
+		void write_position(string filename);
 };
 
 #endif
