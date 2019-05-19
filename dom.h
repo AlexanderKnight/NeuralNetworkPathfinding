@@ -7,8 +7,8 @@ using namespace std;
 
 class Domain{
 	int width, height;
-	vector<vector<int>> domain;
 	public:
+		vector<vector<int>> domain;
 		Domain(int w, int h);
 		Domain(int w, int h, int randChance);
 		const int get_width(void);
