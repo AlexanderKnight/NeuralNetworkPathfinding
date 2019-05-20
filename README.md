@@ -3,7 +3,7 @@
 ### Final Project
 #### Alexander Knight
 
-[Time=0, 50 Seekers, 20x20 domain with randomChance = 25](https://user-images.githubusercontent.com/15788315/58054722-764acd00-7b29-11e9-8bae-985088378e4b.png)
+![Time=0, 50 Seekers, 20x20 domain with randomChance = 25](https://user-images.githubusercontent.com/15788315/58054722-764acd00-7b29-11e9-8bae-985088378e4b.png)
 
 [Time=143, 50 Seekers, 20x20 domain with randomChance = 25](https://user-images.githubusercontent.com/15788315/58054747-8ebae780-7b29-11e9-89fb-0d1faf2fce78.png)
 
