@@ -22,9 +22,9 @@ Domain::Domain (int w, int h){
 	height = h;
 	domain.resize(width);
 	for (int i=0;i<width;i++){
-		domain[i].resize(height);
+		domain.at(i).resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0.;
+			domain.at(i).at(j)=0.;
 		}
 	}
 }
@@ -34,31 +34,31 @@ Domain::Domain (int w, int h, int randChance){
 	height = h;
 	domain.resize(width);
 	for (int i=0;i<width;i++){
-		domain[i].resize(height);
+		domain.at(i).resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0.;
+			domain.at(i).at(j)=0.;
 		}
 	}
 	srand(time(0));
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){
 			if ((rand()%100+1)<randChance){
-				domain[i][j] = 1.;
+				domain.at(i).at(j) = 1.;
 			}
 		}
 	}
 	this->clear_loc(2,2);
 	this->clear_loc(width-2,height-2);
 	for (int i=0;i<width;i++){
-		domain[i][0] = 1.;
-		domain[i][height-1] =1.;
+		domain.at(i).at(0) = 1.;
+		domain.at(i).at(height-1) =1.;
 	}
 	for (int j=0;j<height;j++){
-		domain[0][j] = 1.;
-		domain[width-1][j] = 1.;
+		domain.at(0).at(j) = 1.;
+		domain.at(width-1).at(j) = 1.;
 	}
-	domain[1][1] = 2;
-	domain[width-2][height-2] = 3.;
+	domain.at(1).at(1) = 2;
+	domain.at(width-2).at(height-2) = 3.;
 }
 
 const int Domain::get_width(void){
@@ -70,17 +70,17 @@ const int Domain::get_height(void){
 }
 
 void Domain::set_loc_prop(int x,int y,double s){
-	domain[x][y] = s;
+	domain.at(x).at(y) = s;
 }
 
 const int Domain::get_loc_prop(int x,int y){
-	return domain[x][y];
+	return domain.at(x).at(y);
 }
 
 void Domain::set_zero(void){
 	for(int i=0;i<width;i++){
 		for(int j=0;j<height;j++){
-			domain[i][j]=0.;
+			domain.at(i).at(j)=0.;
 		}
 	}
 }
@@ -91,40 +91,40 @@ void Domain::reset_domain(int w, int h, int randChance){
 	height = h;
 	domain.resize(width);
 	for (int i=0;i<width;i++){
-		domain[i].resize(height);
+		domain.at(i).resize(height);
 		for (int j=0;j<height;j++){
-			domain[i][j]=0.;
+			domain.at(i).at(j)=0.;
 		}
 	}
 	srand(time(0));
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){
 			if ((rand()%100+1)<randChance){
-				domain[i][j] = 1.;
+				domain.at(i).at(j) = 1.;
 			}
 		}
 	}
 	this->clear_loc(2,2);
 	this->clear_loc(width-2,height-2);
 	for (int i=0;i<width;i++){
-		domain[i][0] = 1.;
-		domain[i][height-1] =1.;
+		domain.at(i).at(0) = 1.;
+		domain.at(i).at(height-1) =1.;
 	}
 	for (int j=0;j<height;j++){
-		domain[0][j] = 1;
-		domain[width-1][j] = 1.;
+		domain.at(0).at(j) = 1;
+		domain.at(width-1).at(j) = 1.;
 	}
 
-	domain[1][1] = 2;
-	domain[width-2][height-2] = 3.;
+	domain.at(1).at(1) = 2;
+	domain.at(width-2).at(height-2) = 3.;
 }
 
 
 void Domain::clear_loc(int x,int y){
-	domain[x-1][y-1] = 0.;
-	domain[x][y-1] = 0.;
-	domain[x-1][y] = 0.;
-	domain[x][y] = 0.;
+	domain.at(x-1).at(y-1) = 0.;
+	domain.at(x).at(y-1) = 0.;
+	domain.at(x-1).at(y) = 0.;
+	domain.at(x).at(y) = 0.;
 }
 
 void Domain::save_domain(string filename){
@@ -132,7 +132,7 @@ void Domain::save_domain(string filename){
 	outfile << width << endl << height << endl;
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){
-			outfile << domain[i][j] << " ";
+			outfile << domain.at(i).at(j) << " ";
 		}
 		outfile << endl;
 	}
@@ -145,14 +145,13 @@ void Domain::load_domain(string filename){
 	infile >> height;
 	domain.resize(width);
 	for(int i=0;i<width;i++){
-		domain[i].resize(height);
+		domain.at(i).resize(height);
 		for(int j=0;j<height;j++){
-			infile >> domain[i][j];
+			infile >> domain.at(i).at(j);
 		}
 	}
 	infile.close();
-}
-
+} 
 const void Domain::print_domain(void){
 	for (int i=0;i<width;i++){
 		for (int j=0;j<height;j++){

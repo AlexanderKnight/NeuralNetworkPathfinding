@@ -46,28 +46,28 @@ const vector<double> Layer::get_outputs(void){
 
 void Layer::update_outputs(void){
 	for (int i=0;i<neurons.size();i++){
-		neurons[i].set_inputs(inputs);
-		neurons[i].update_output();
-		outputs[i] = neurons[i].get_output();
+		neurons.at(i).set_inputs(inputs);
+		neurons.at(i).update_output();
+		outputs.at(i) = neurons.at(i).get_output();
 	}
 }
 
 void Layer::mutate(void){
 	for (int i=0;i<neurons.size();i++){
-		neurons[i].mutate();
+		neurons.at(i).mutate();
 	}
 }
 
 void Layer::reset(void){
 	for(int i=0;i<neurons.size();i++){
-		neurons[i].reset();
+		neurons.at(i).reset();
 	}
 }
 
 const vector<vector<double>> Layer::get_genes(void){
 	vector<vector<double>> layer_genes;
 	for(int i=0;i<neurons.size();i++){
-		layer_genes.push_back(neurons[i].get_genes());
+		layer_genes.push_back(neurons.at(i).get_genes());
 	}
 	return layer_genes;
 }
@@ -75,6 +75,6 @@ const vector<vector<double>> Layer::get_genes(void){
 void Layer::print_genes(void){
 	for (int i=0;i<neurons.size();i++){
 		cout << "Neuron " << i << endl;
-		neurons[i].print_genes();
+		neurons.at(i).print_genes();
 	}
 }

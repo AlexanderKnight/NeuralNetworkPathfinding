@@ -31,12 +31,16 @@ void Seeker::update_network(void){
 void Seeker::move_seeker(vector<vector<double> > domain){
 	if (!isDead){
 		update_network();
-		double absXY = 2.*sqrt(pow(outputs[0]-outputs[1],2)+pow(outputs[2]-outputs[3],2));
-		x += (outputs[0]-outputs[1])/absXY;
-		y += (outputs[2]-outputs[3])/absXY;
-		input[input.size()-2] = x;
-		input[input.size()-1] = y;
-		if (domain[(int)x][(int)y]==3.){
+		if (outputs.at(0)==0. and outputs.at(1)==0. and outputs.at(2)==0. and outputs.at(3)==0.){
+			outputs.at(0)=1;
+			outputs.at(2)=1;
+		}
+		double absXY = 2.*sqrt(pow(outputs.at(0)-outputs.at(1),2)+pow(outputs.at(2)-outputs.at(3),2));
+		x += (outputs.at(0)-outputs.at(1))/absXY;
+		y += (outputs.at(2)-outputs.at(3))/absXY;
+		input.at(input.size()-2) = x;
+		input.at(input.size()-1) = y;
+		if (domain.at((int)x).at((int)y)==3.){
 			isDead = true;
 		}
 	}
@@ -45,7 +49,7 @@ void Seeker::move_seeker(vector<vector<double> > domain){
 }
 
 void Seeker::check_collisions(vector<vector<double> > domain){
-	if (domain[(int) x][(int) y]==1.){
+	if (domain.at((int) x).at((int) y)==1.){
 		isDead = true;
 	}
 }
@@ -69,9 +73,9 @@ void Seeker::read_seeker(string filename){
 }
 
 void Seeker::reset_position(double xx, double yy){
-	input[input.size()-2]=xx;
+	input.at(input.size()-2)=xx;
 	x = xx;
-	input[input.size()-1]=yy;
+	input.at(input.size()-1)=yy;
 	y = yy;
 	isDead = false;
 }
@@ -79,14 +83,14 @@ void Seeker::reset_position(double xx, double yy){
 void Seeker::write_position(string filename){
 	ofstream pos_file(filename, ios::out | ios::app);
 	for(int i=0;i<position.size();i++){
-		pos_file << position[i][0] << " " << position[i][1] << endl;
+		pos_file << position.at(i).at(0) << " " << position.at(i).at(1) << endl;
 	}
 	pos_file.close();
 }
 
 void Seeker::write_each_position(string filename){
 	ofstream pos_file(filename, ios::out | ios::app);
-	pos_file << position[position.size()-1][0] << " " << position[position.size()-1][1] << endl;
+	pos_file << position.at(position.size()-1).at(0) << " " << position.at(position.size()-1).at(1) << endl;
 	pos_file.close();
 }
 

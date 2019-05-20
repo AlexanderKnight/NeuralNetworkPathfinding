@@ -5,6 +5,7 @@ project (NeuralNetworkPathfinding)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-g")
 
 find_package(MPI REQUIRED)
 

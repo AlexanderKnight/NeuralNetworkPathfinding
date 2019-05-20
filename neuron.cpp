@@ -26,7 +26,7 @@ Neuron::Neuron(vector<double> in, vector<double> w, double b){
 	weights = w;
 	output=0.;
 	for (int i=0;i<inputs.size();i++){
-		output += inputs[i]*weights[i];
+		output += inputs.at(i)*weights.at(i);
 	}
 	output += bias;
 }
@@ -36,13 +36,13 @@ Neuron::Neuron(vector<double> in,
 		vector<double> b_range){
 	weight_range = w_range;
 	bias_range = b_range;
-	bias = fRand(b_range[0],b_range[1]);
+	bias = fRand(b_range.at(0),b_range.at(1));
 	inputs = in;
 	weights.resize(inputs.size());
 	output=0.;
 	for (int i=0;i<inputs.size();i++){
-		weights[i] = fRand(w_range[0],w_range[1]);
-		output += inputs[i]*weights[i];
+		weights.at(i) = fRand(w_range.at(0),w_range.at(1));
+		output += inputs.at(i)*weights.at(i);
 	}
 	output += bias;
 }
@@ -85,7 +85,7 @@ const double Neuron::get_output(void){
 void Neuron::update_output(void){
 	output=0.;
 	for (int i=0;i<inputs.size();i++){
-		output += inputs[i]*weights[i];
+		output += inputs.at(i)*weights.at(i);
 	}
 	output += bias;
 	if (output <0.){
@@ -96,22 +96,22 @@ void Neuron::update_output(void){
 
 void Neuron::mutate(void){
 	for (int i=0; i<weights.size();i++){
-		weights[i] *= 1+fRand(-0.05,0.05);
+		weights.at(i) *= 1+fRand(-0.05,0.05);
 	}
 	bias *= 1+fRand(-0.05,0.05);
 }
 
 void Neuron::reset(void){
 	for (int i=0;i<weights.size();i++){
-		weights[i] = fRand(weight_range[0],weight_range[1]);
+		weights.at(i) = fRand(weight_range.at(0),weight_range.at(1));
 	}
-	bias = fRand(bias_range[0],bias_range[1]);
+	bias = fRand(bias_range.at(0),bias_range.at(1));
 }
 
 void Neuron::print_genes(void){
 	cout << "Weights are : ";
 	for (int i=0;i<weights.size();i++){
-		cout << weights[i] << ", ";
+		cout << weights.at(i) << ", ";
 	}
 	cout << endl;
 	cout << "Bias is " << bias << endl;
