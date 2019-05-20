@@ -5,10 +5,14 @@ using namespace std;
 #include "nnpf.h"
 
 int main(){
+	// Adjust these parameters to customize domain
 	int width = 20;
 	int height = 20;
 	int randChance = 25;
-	string domain_savefile = "20x20rand30.dat";
+
+	// Should not need to change anything below
+
+	string domain_savefile = to_string(width)+"x"+to_string(height)+"rand"+to_string(randChance)+".dat";
 	Domain domain (width,height,randChance);
 	cout << "Seekers will start at top left corner and aim for bottom right corner.\n Walls are 1's and open space are 0's.\n Please ensure that there is a path between the start and finish" << endl;
 	domain.print_domain();

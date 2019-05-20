@@ -6,7 +6,7 @@ import matplotlib.cm as cm
 
 
 # Match variables below to run
-domain = np.genfromtxt("20x20rand30.dat", skip_header=2)
+domain_file = "20x20rand30.dat"
 seekers = 50
 cores = 2
 domain_x = 20
@@ -14,6 +14,7 @@ domain_y = 20
 iterations = 200
 
 # Should not need to adjust anything below here
+domain = np.genfromtxt(domain_file, skip_header=2)
 pos_data = np.zeros(14)
 
 dom_x, dom_y = domain.shape
