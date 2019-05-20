@@ -19,6 +19,7 @@ Seeker::Seeker(vector<vector<double> > in){
 	input.push_back(y);
 	network = new Network(4,15,input, w_range,b_range);
 	isDead = false;
+	this->update_network();
 }
 
 void Seeker::update_network(void){
@@ -30,17 +31,17 @@ void Seeker::update_network(void){
 void Seeker::move_seeker(vector<vector<double> > domain){
 	if (!isDead){
 		update_network();
-		double absXY = sqrt(pow(outputs[0]-outputs[1],2)+pow(outputs[2]-outputs[3],2));
+		double absXY = 2.*sqrt(pow(outputs[0]-outputs[1],2)+pow(outputs[2]-outputs[3],2));
 		x += (outputs[0]-outputs[1])/absXY;
 		y += (outputs[2]-outputs[3])/absXY;
 		input[input.size()-2] = x;
 		input[input.size()-1] = y;
-		vector<double> new_position {x,y};
-		position.push_back(new_position);
 		if (domain[(int)x][(int)y]==3.){
 			isDead = true;
 		}
 	}
+	vector<double> new_position {x,y};
+	position.push_back(new_position);
 }
 
 void Seeker::check_collisions(vector<vector<double> > domain){
@@ -83,6 +84,12 @@ void Seeker::write_position(string filename){
 	pos_file.close();
 }
 
+void Seeker::write_each_position(string filename){
+	ofstream pos_file(filename, ios::out | ios::app);
+	pos_file << position[position.size()-1][0] << " " << position[position.size()-1][1] << endl;
+	pos_file.close();
+}
+
 void Seeker::reset_network(void){
 	network->reset();
 }
@@ -90,3 +97,12 @@ void Seeker::reset_network(void){
 void Seeker::mutate_network(void){
 	network->mutate();
 }
+
+void Seeker::print_genes(void){
+	network->print_genes();
+}
+
+const double Seeker::get_score(void){
+	return score;
+}
+

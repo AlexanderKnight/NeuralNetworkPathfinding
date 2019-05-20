@@ -1,6 +1,9 @@
 #include <vector>
-#include "nnpf.h"
+#include <iostream>
+#include <fstream>
 using namespace std;
+
+#include "nnpf.h"
 
 Network::Network(int layer_num, int hl_neuron_num, 
 		vector<double> in,
@@ -20,7 +23,7 @@ Network::Network(int layer_num, int hl_neuron_num,
 			layers.push_back(temp_layer);
 		}
 	}
-	layers[layer_num-1] = Layer(layers[layer_num-2].get_outputs(),4,bias_range,weight_range);
+	layers.push_back(Layer(layers[layer_num-2].get_outputs(),4,bias_range,weight_range));
 	outputs = layers[layer_num-1].get_outputs();
 }
 
@@ -66,4 +69,11 @@ const vector<vector<vector<double>>> Network::get_genes(void){
 		network_genes.push_back(layers[i].get_genes());
 	}
 	return network_genes;
+}
+
+void Network::print_genes(void){
+	for (int i=0;i<layers.size();i++){
+		cout << "Layer " << i << endl;
+		layers[i].print_genes();
+	}
 }

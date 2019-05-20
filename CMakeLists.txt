@@ -25,4 +25,4 @@ add_executable(create_domain create_domain.cpp)
 target_link_libraries(create_domain nnpflib)
 
 add_executable(pathfinder main.cpp)
-target_link_libraries(pathfinder nnpflib MPI::MPI_C m)
+target_link_libraries(pathfinder nnpflib MPI::MPI_CXX m)

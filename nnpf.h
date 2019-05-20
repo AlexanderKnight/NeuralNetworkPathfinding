@@ -5,15 +5,24 @@
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
+#include <random>
 #include <fstream>
 using namespace std;
 
 
 inline double fRand(double fMin, double fMax)
 {
-	srand(time(0));
-	double f = (double)rand() / RAND_MAX;
-		return fMin + f * (fMax - fMin);
+	random_device rd;
+        mt19937 mt(rd());
+	uniform_real_distribution<double> dist(fMin, fMax);
+	return dist(mt);
+
+	//uniform_real_distribution<double> unif(fMin,fMax);
+	//default_random_engine re;
+	//return unif(re);
+	//srand(time(0));
+	//double f = (double)rand() / RAND_MAX;
+	//	return fMin + f * (fMax - fMin);
 }
 
 inline vector<int> flatten_int_array(vector<vector<int> > v){
@@ -75,6 +84,7 @@ class Neuron{
 		void mutate(void);
 		void reset(void);
 		const vector<double> get_genes(void);
+		void print_genes(void);
 };
 
 class Layer{
@@ -90,6 +100,7 @@ class Layer{
 		void mutate(void);
 		void reset(void);
 		const vector<vector<double> > get_genes(void);
+		void print_genes(void);
 };
 
 class Network{
@@ -105,6 +116,7 @@ class Network{
 		void update_network(void);
 		const vector<vector<vector<double> > > get_genes(void);
 		const int layer_num(void);  
+		void print_genes(void);
 };
 
 class Seeker{
@@ -123,8 +135,11 @@ class Seeker{
 		void read_seeker(string filename);
 		void reset_position(double x, double y);
 		void write_position(string filename);
+		void write_each_position(string filename);
 		void reset_network(void);
 		void mutate_network(void);
+		void print_genes(void);
+		const double get_score(void);
 };
 
 #endif

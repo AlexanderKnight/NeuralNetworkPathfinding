@@ -1,5 +1,7 @@
 #include <assert.h>
 #include <vector>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 #include "nnpf.h"
@@ -68,4 +70,11 @@ const vector<vector<double>> Layer::get_genes(void){
 		layer_genes.push_back(neurons[i].get_genes());
 	}
 	return layer_genes;
+}
+
+void Layer::print_genes(void){
+	for (int i=0;i<neurons.size();i++){
+		cout << "Neuron " << i << endl;
+		neurons[i].print_genes();
+	}
 }

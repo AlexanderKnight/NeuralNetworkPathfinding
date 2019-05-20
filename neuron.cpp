@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <assert.h>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 #include "nnpf.h"
@@ -104,4 +106,13 @@ void Neuron::reset(void){
 		weights[i] = fRand(weight_range[0],weight_range[1]);
 	}
 	bias = fRand(bias_range[0],bias_range[1]);
+}
+
+void Neuron::print_genes(void){
+	cout << "Weights are : ";
+	for (int i=0;i<weights.size();i++){
+		cout << weights[i] << ", ";
+	}
+	cout << endl;
+	cout << "Bias is " << bias << endl;
 }
