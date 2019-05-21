@@ -11,7 +11,7 @@ int main(int argc, char **argv){
 
 	MPI_Init(&argc, &argv);
 
-	string load_domain_filename = "20x20rand30.dat";
+	string load_domain_filename = "20x20rand25.dat";
 	int seeker_num = 50;
 	int runtime = 100;
 	int iterations = 200;
@@ -21,7 +21,7 @@ int main(int argc, char **argv){
 
 
 	Domain domain (1,1);
-	domain.load_domain("20x20rand30.dat");
+	domain.load_domain("20x20rand25.dat");
 	//domain.print_domain();
 
 
