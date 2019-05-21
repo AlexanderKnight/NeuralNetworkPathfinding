@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <mpi.h>
-#include <bits/stdc++.h>
+
 using namespace std;
 
 #include "nnpf.h"

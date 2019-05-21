@@ -5,11 +5,11 @@ project (NeuralNetworkPathfinding)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set (CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-g")
 
 find_package(MPI REQUIRED)
 
 add_library(nnpflib nnpf.h domain.cpp main.cpp seeker.cpp network.cpp layer.cpp neuron.cpp)
+target_link_libraries(nnpflib PUBLIC MPI::MPI_CXX)
 #add_library(domlib dom.h domain.cpp)
 
 #add_library(celllib cells.h average_cell_centers.c)
@@ -26,4 +26,4 @@ add_executable(create_domain create_domain.cpp)
 target_link_libraries(create_domain nnpflib)
 
 add_executable(pathfinder main.cpp)
-target_link_libraries(pathfinder nnpflib MPI::MPI_CXX m)
+target_link_libraries(pathfinder nnpflib m)
